@@ -1,4 +1,5 @@
 import 'package:app_controla_pedido/models/customer.dart';
+import 'package:app_controla_pedido/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 
@@ -37,7 +38,10 @@ class CustomerTile extends StatelessWidget {
         child: Row(
           children: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(AppRoutes.customerForm, arguments: customer);
+                },
                 icon: const Icon(
                   Icons.edit,
                   color: Colors.orange,

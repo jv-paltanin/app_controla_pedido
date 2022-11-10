@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           AppRoutes.home: (_) => const CustomerList(),
-          AppRoutes.customerForm: (_) => const CustomerForm()
+          AppRoutes.customerForm: (_) => CustomerForm()
         },
       ),
     );
