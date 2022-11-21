@@ -47,7 +47,30 @@ class CustomerTile extends StatelessWidget {
                   color: Colors.orange,
                 )),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: ((ctx) => AlertDialog(
+                          title: const Text('Excluir Cliente'),
+                          content: const Text(
+                              'Você realmente deseja excluir esse cliente?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Não'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                // exclusão do cliente
+                              },
+                              child: const Text('Sim'),
+                            )
+                          ],
+                        )),
+                  );
+                },
                 icon: const Icon(Icons.delete, color: Colors.red))
           ],
         ),
