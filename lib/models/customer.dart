@@ -1,14 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class Customer {
-  final String? id;
-  final String cpf;
-  final String name;
-  final String lastname;
+  int? id;
+  String cpf;
+  String name;
+  String lastname;
 
-  Customer({
-    this.id,
-    required this.cpf,
-    required this.name,
-    required this.lastname,
-  });
+  Customer(this.id, this.cpf, this.name, this.lastname);
+  Customer.newCustomer(this.cpf, this.name, this.lastname);
 }

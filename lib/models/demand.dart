@@ -2,15 +2,11 @@ import 'package:app_controla_pedido/models/customer.dart';
 import 'package:app_controla_pedido/models/item_demand.dart';
 
 class Demand {
-  final String id;
-  final String data;
-  final Customer customer;
+  int? id;
+  String data;
+  Customer customer;
   List<ItemDemand> items = [];
 
-  Demand({
-    required this.id,
-    required this.data,
-    required this.customer,
-    required this.items,
-  });
+  Demand(this.id, this.data, this.customer, this.items);
+  Demand.newDemand(this.data, this.customer, this.items);
 }

@@ -1,9 +1,7 @@
 class Product {
-  final String id;
-  final String description;
+  int? id;
+  String description;
 
-  Product({
-    required this.id,
-    required this.description,
-  });
+  Product(this.id, this.description);
+  Product.newProduct(this.description);
 }
