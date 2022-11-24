@@ -22,8 +22,12 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         routes: {
-          AppRoutes.home: (_) => const CustomerList(),
-          AppRoutes.customerForm: (_) => CustomerForm()
+          AppRoutes.customerList: (_) => const CustomerList(),
+          AppRoutes.customerForm: (_) => CustomerForm(),
+          AppRoutes.productList: (_) => const CustomerList(),
+          AppRoutes.productForm: (_) => CustomerForm(),
+          AppRoutes.demandList: (_) => const CustomerList(),
+          AppRoutes.demandForm: (_) => CustomerForm(),
         },
       ),
     );
