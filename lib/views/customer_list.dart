@@ -35,9 +35,18 @@ class CustomerList extends StatelessWidget {
           const BottomNavigationBarItem(
               icon: Icon(Icons.shopping_bag_outlined), label: "Pedidos"),
         ],
-        onTap: (intindex) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text("Pressionado:")));
+        onTap: (int index) {
+          switch (index) {
+            case 0:
+              Navigator.pushNamed(context, AppRoutes.customerList);
+              break;
+            case 1:
+              Navigator.pushNamed(context, AppRoutes.productList);
+              break;
+            case 2:
+              Navigator.pushNamed(context, AppRoutes.demandList);
+              break;
+          }
         },
       ),
     );

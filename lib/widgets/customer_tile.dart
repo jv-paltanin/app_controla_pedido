@@ -12,7 +12,7 @@ class CustomerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Text(
-        customer.id!,
+        customer.id.toString(),
         style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 16,

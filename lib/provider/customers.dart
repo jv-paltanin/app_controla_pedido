@@ -23,22 +23,17 @@ class Customers with ChangeNotifier {
     }
 
     if (customer.id != null &&
-        customer.id!.trim().isNotEmpty &&
+        customer.id!.toString().trim().isNotEmpty &&
         _items.containsKey(customer.id)) {
       _items.update(
-          customer.id!,
+          customer.id!.toString(),
           (_) => Customer(
-              id: customer.id,
-              cpf: customer.cpf,
-              name: customer.name,
-              lastname: customer.lastname));
+              customer.id, customer.cpf, customer.name, customer.lastname));
     } else {
       _items.putIfAbsent(
           customer.cpf,
-          () => Customer(
-              cpf: customer.cpf,
-              name: customer.name,
-              lastname: customer.lastname));
+          () => Customer.newCustomer(
+              customer.cpf, customer.name, customer.lastname));
     }
 
     notifyListeners();

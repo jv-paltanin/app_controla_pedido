@@ -1,9 +1,7 @@
 import 'package:app_controla_pedido/models/customer.dart';
-import 'package:app_controla_pedido/provider/customers.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 class CustomerForm extends StatelessWidget {
   CustomerForm({super.key});
@@ -12,7 +10,7 @@ class CustomerForm extends StatelessWidget {
   final Map<String, String> _formData = {};
 
   void _loadFormData(Customer customer) {
-    _formData['id'] = customer.id!;
+    _formData['id'] = customer.id!.toString();
     _formData['cpf'] = customer.cpf;
     _formData['name'] = customer.name;
     _formData['lastname'] = customer.lastname;
@@ -34,12 +32,12 @@ class CustomerForm extends StatelessWidget {
 
                 if (isValid) {
                   _form.currentState?.save();
-                  Provider.of<Customers>(context, listen: false).put(Customer(
-                    id: _formData['id'],
-                    cpf: _formData['cpf']!,
-                    name: _formData['name']!,
-                    lastname: _formData['lastname']!,
-                  ));
+                  // Provider.of<Customers>(context, listen: false).put(Customer(
+                  //   id: _formData['id'],
+                  //   cpf: _formData['cpf']!,
+                  //   name: _formData['name']!,
+                  //   lastname: _formData['lastname']!,
+                  // ));
                   Navigator.of(context).pop();
                 }
               },
