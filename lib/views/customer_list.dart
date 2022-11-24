@@ -25,6 +25,21 @@ class CustomerList extends StatelessWidget {
       body: ListView.builder(
           itemCount: customers.count,
           itemBuilder: ((ctx, i) => CustomerTile(customers.byIndex(i)))),
+      bottomNavigationBar: BottomNavigationBar(
+        // ignore: prefer_const_literals_to_create_immutables
+        items: [
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline_rounded), label: "Clientes"),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.storefront), label: "Produtos"),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag_outlined), label: "Pedidos"),
+        ],
+        onTap: (intindex) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(const SnackBar(content: Text("Pressionado:")));
+        },
+      ),
     );
   }
 }
