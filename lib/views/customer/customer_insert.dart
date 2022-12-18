@@ -1,3 +1,6 @@
+import 'package:app_controla_pedido/helper/error.dart';
+import 'package:app_controla_pedido/models/customer.dart';
+import 'package:app_controla_pedido/repositories/customer_repository.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,11 +27,20 @@ class _CustomerInsertState extends State<CustomerInsert> {
   }
 
   void _salvar() async {
-    _cpfController.clear();
-    _nameController.clear();
-    _lastnameController.clear();
-    ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Cliente salvo com sucesso.')));
+    Customer customer = Customer.newCustomer(
+        _cpfController.text, _nameController.text, _lastnameController.text);
+    try {
+      CustomerRepository repository = CustomerRepository();
+      await repository.inserir(customer);
+      _cpfController.clear();
+      _nameController.clear();
+      _lastnameController.clear();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Cliente salvo com sucesso.')));
+    } catch (exception) {
+      Error()
+          .showError(context, "Erro inserindo cliente", exception.toString());
+    }
   }
 
   Widget _buildForm(BuildContext context) {

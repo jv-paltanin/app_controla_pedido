@@ -1,4 +1,6 @@
+import 'package:app_controla_pedido/helper/error.dart';
 import 'package:app_controla_pedido/models/customer.dart';
+import 'package:app_controla_pedido/repositories/customer_repository.dart';
 import 'package:app_controla_pedido/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,7 @@ class CustomerList extends StatefulWidget {
 
 class _CustomerListState extends State<CustomerList> {
   List<Customer> _lista = <Customer>[];
+
   @override
   void initState() {
     super.initState();
@@ -30,14 +33,29 @@ class _CustomerListState extends State<CustomerList> {
   }
 
   Future<List<Customer>> _obterTodos() async {
-    return <Customer>[
-      Customer(1, '52693863058', 'João', 'Silva'),
-      Customer(2, '88905526039', 'Elisa', 'Pereira'),
-      Customer(4, '96241201026', 'Cleverson', 'Yun')
-    ];
+    List<Customer> tempLista = <Customer>[];
+    try {
+      CustomerRepository repository = CustomerRepository();
+      tempLista = await repository.buscarTodos();
+    } catch (exception) {
+      Error().showError(
+          context, "Erro obtendo lista de clientes", exception.toString());
+    }
+    return tempLista;
   }
 
-  void _removerCustomer(int id) async {}
+  void _removerCustomer(int id) async {
+    try {
+      CustomerRepository repository = CustomerRepository();
+      await repository.remover(id);
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Cliente $id removido com sucesso.')));
+    } catch (exception) {
+      Error()
+          .showError(context, "Erro removendo cliente", exception.toString());
+    }
+  }
 
   void _showItem(BuildContext context, int index) {
     Customer customer = _lista[index];
@@ -47,17 +65,28 @@ class _CustomerListState extends State<CustomerList> {
           return AlertDialog(
               title: Text(customer.name),
               content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("CPF: ${customer.cpf}"),
-                  Text("Nome: ${customer.name}"),
-                  Text("Sobrenome: ${customer.lastname}"),
+                  Row(children: [
+                    const Icon(Icons.create),
+                    Text("CPF: ${customer.cpf}")
+                  ]),
+                  Row(children: [
+                    const Icon(Icons.assistant_photo),
+                    Text("Nome: ${customer.name}")
+                  ]),
+                  Row(children: [
+                    const Icon(Icons.cake),
+                    Text("Sobrenome: ${customer.lastname}")
+                  ]),
                 ],
               ),
               actions: [
                 TextButton(
                     child: const Text("OK"),
                     onPressed: () {
-                      Navigator.of(context).pop(); // fecha a dialog
+                      Navigator.of(context).pop();
                     })
               ]);
         });
