@@ -1,5 +1,5 @@
-import 'package:app_controla_pedido/models/customer_model.dart';
-import 'package:app_controla_pedido/models/item_model.dart';
+import 'package:app_controla_pedido/src/models/customer_model.dart';
+import 'package:app_controla_pedido/src/models/item_model.dart';
 
 class Demand {
   int? id;

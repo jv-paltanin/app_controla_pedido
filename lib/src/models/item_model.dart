@@ -1,4 +1,4 @@
-import 'package:app_controla_pedido/models/product_model.dart';
+import 'package:app_controla_pedido/src/models/product_model.dart';
 
 class Item {
   int? id;
