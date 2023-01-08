@@ -1,21 +1,22 @@
 import 'package:app_controla_pedido/src/models/customer_model.dart';
 import 'package:app_controla_pedido/src/repositories/customer_repository.dart';
+import 'package:flutter/cupertino.dart';
 
 class CustomerController {
   List<Customer> customers = [];
   final CustomerRepository _repository;
-  CustomerState state = CustomerState.start;
+  final state = ValueNotifier<CustomerState>(CustomerState.start);
 
   CustomerController([CustomerRepository? repository])
       : _repository = repository ?? CustomerRepository();
 
   Future start() async {
-    state = CustomerState.loading;
+    state.value = CustomerState.loading;
     try {
       customers = await _repository.fetchCustomers();
-      state = CustomerState.success;
+      state.value = CustomerState.success;
     } catch (e) {
-      state = CustomerState.error;
+      state.value = CustomerState.error;
     }
   }
 }
